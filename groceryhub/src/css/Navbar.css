@@ -1,0 +1,41 @@
+.items {
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+}
+.items .item {
+      display: flex;
+      align-items: center;
+      margin-right: 20px;
+      width: 30px;
+      height: 30px;
+      position: relative;
+      cursor: pointer;
+}
+
+.items .item .icon {
+        font-size: 20px;
+      }
+
+.items .item .avatar {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        margin-right: 5px;
+      }
+
+.items .item.counter {
+        width: 15px;
+        height: 15px;
+        background-color: red;
+        border-radius: 50%;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        font-weight: bold;
+        position: absolute;
+        top: -5px;
+        right: -5px;
+      }
