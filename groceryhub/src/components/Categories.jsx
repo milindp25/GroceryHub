@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 import styled from 'styled-components';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { publicRequest } from '../redux/ApiRequest';
+import Product from './Product';
 
 const Icon = styled.div`
 
@@ -68,24 +70,41 @@ function SamplePrevArrow(props) {
 }
 
 
+
+
 export const Categories = () => {
 
     const [productCategory, setProductCategory] = useState([]);
+    const [products, setProducts] = useState([]);
 
     /* fetches all product caretgories*/
     useEffect(() => {
         
         const getProduct = async () => {
             try{
-                const resp = await axios.get(`http://localhost:5000/groceryhub/getProductCategory`);
+                const resp = await publicRequest.get(`/getProductCategory`);
                 setProductCategory(resp.data);
             }
             catch(err)
             {   console.log(err);
                 throw err;}
         };
+        const getPopular = async () => {
+          try{
+              const resp = await publicRequest.get(`/popular`);
+              setProducts(resp.data);
+          }
+          catch(err)
+          {   console.log(err);
+              throw err;}
+      };
         getProduct();  
+        getPopular();
     },[]);
+
+    console.log(products);
+
+    
 
     var settings = {
         dots: true,
@@ -185,6 +204,17 @@ export const Categories = () => {
         </Carousel.Caption>
       </Carousel.Item>
     </Carousel>
+    <br/>
+    <h2 style = {{color : "red",textAlign :"center"}}> Most popular products </h2>
+    <section class="section-products">
+		<div class="container">
+            <div class="row">
+            {products.map((items) => (
+            <Product item={items} key={items.prod_id} ></Product>
+        ))} 
+    				</div>
+    </div>
+    </section>
     </Container>
     <br />
     <br />    

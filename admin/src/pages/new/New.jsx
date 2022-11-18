@@ -64,7 +64,7 @@ const addUser = async () => {
     });
     console.log("Resp is  " +res.data);
   } catch {}
-  alert("Product added succefully");
+  alert("User added succefully");
   window.location.reload(true);
 };
 

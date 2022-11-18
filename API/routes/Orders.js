@@ -7,7 +7,7 @@ router.get("/getOrderID", async (req, resp) => {
 
     const db_con = require("../DB_Connection_Establishment");
     
-    var result = db_con.query(`select max(orderID)+1 as order_id from orders`,(err,res,fields) => {
+    var result = db_con.query(`select IFNULL(max(orderID)+1,1) as order_id from orders`,(err,res,fields) => {
       if (err) 
       {
       resp.status(500).json(err);
@@ -69,7 +69,7 @@ router.post("/placeOrder",(req,resp) => {
 
           var queries = '';
           req.body.products.forEach(function (item) {
-            queries += mysql.format(`UPDATE products SET quantity = quantity -${item.quantity} WHERE prod_id = ${item.productId}; `);
+            queries += mysql.format(`UPDATE products SET quantity = quantity-'${item.quantity}' WHERE prod_id = '${item.productId}'; `);
           });
           
           db_con.query(queries,(err,res) => {

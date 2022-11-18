@@ -48,7 +48,7 @@ router.get("/getProductCategory", async (req, resp) => {
     const db_con = require("../DB_Connection_Establishment");
     const qCategory = req.query.category == undefined ? "" : req.query.category;
     
-    var result = db_con.query(`Select *,ROW_NUMBER() OVER(PARTITION BY prod_id) AS row_num from products where prod_cat like ?`, '%' + qCategory + '%',(err,res,fields) => {
+    var result = db_con.query(`Select *,ROW_NUMBER() OVER(PARTITION BY prod_id) AS row_num from products where quantity > 0 and  prod_cat like ?`, '%' + qCategory + '%',(err,res,fields) => {
       if (err) 
       {
       resp.status(500).json(err);
@@ -164,6 +164,27 @@ router.post("/deleteProduct", async (req, resp) => {
   try {
   } catch (err) {
     resp.status(500).json(err);
+  }
+});
+
+router.get("/popular", async (req, resp) => {
+    
+  const db_con = require("../DB_Connection_Establishment");
+
+  
+  var result = db_con.query(`select a.* from order_details o , products a where o.productId = a.prod_id group by a.prod_id order by count(1) desc limit 6`,(err,res,fields) => {
+    if (err) 
+    {
+    resp.status(500).json(err);
+    throw err;
+    };
+    resp.status(200).json(res);
+});
+
+  try {
+  } catch (err) {
+    resp.status(500).json(err);
+    throw err;
   }
 });
 
