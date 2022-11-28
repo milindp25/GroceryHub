@@ -4,8 +4,8 @@ import { Navbar1 } from '../components/Navbar1';
 import Product from '../components/Product';
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
-import axios from 'axios';
 import { useState,useEffect} from 'react';
+import { publicRequest } from '../redux/ApiRequest';
 import "../css/Product.css"
 
 const Container = styled.div`
@@ -31,8 +31,7 @@ const ProductList = ({category}) => {
         setTitle(id + "  Products")
         const getProduct = async () => {
             try{
-                console.log(`http://localhost:5000/groceryhub/products?category=${id}`)
-                const resp = await axios.get(id ? `http://localhost:5000/groceryhub/products?category=${id}` :`http://localhost:5000/groceryhub/products`);
+                const resp =  await publicRequest.get(id ? `/products?category=${id}` :`/products`);
                 setProducts(resp.data);
             }
             catch(err)

@@ -5,7 +5,6 @@ import { Footer } from '../components/Footer';
 // import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef, useState, useEffect } from "react";
-import axios from 'axios';
 import { publicRequest } from '../redux/ApiRequest';
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{0,23}$/;

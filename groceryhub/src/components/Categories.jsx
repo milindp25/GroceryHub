@@ -1,7 +1,6 @@
 import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import Slider from "react-slick";
-import axios from 'axios';
 import { useState,useEffect} from 'react';
 import { Container } from 'react-bootstrap';
 import { Link } from "react-router-dom";

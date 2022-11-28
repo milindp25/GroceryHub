@@ -1,16 +1,13 @@
 import React, {useEffect, useRef, useState} from 'react'
 import { View } from "react-native-web";
-import { mobile } from "../responsive";
 import styled from 'styled-components';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Search, GpsFixed,AddLocationOutlined } from "@material-ui/icons"
-import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Modal from 'react-bootstrap/Modal';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import Autocomplete from 'react-autocomplete';
@@ -23,15 +20,13 @@ import { locationFetched } from '../redux/dataStorage';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Badge } from '@material-ui/core';
 import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { logout } from '../redux/reduxUser';
 import "../css/Navbar.css";
+import { publicRequest } from '../redux/ApiRequest';
 
 
 const apiKey = "AIzaSyDzJvc9AR2ArCqrRW4wNzvW7hhRpO06BtQ"
@@ -223,7 +218,7 @@ const navigate = useNavigate();
  useEffect(() => {
 const getProduct = async () => {
             try{
-                const resp = await axios.get(`http://localhost:5000/groceryhub/products`);
+                const resp = await publicRequest.get(`http://localhost:5000/groceryhub/products`);
                 setProducts(resp.data);
             }
             catch(err)
