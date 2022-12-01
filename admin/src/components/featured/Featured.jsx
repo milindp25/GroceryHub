@@ -14,7 +14,10 @@ const Featured = () => {
   useEffect(() => {
     const getUsers = async () => {
         try{
-            const resp = await publicRequest.get(`/orders/getDailyRevenue`);
+          let today = new Date()
+          let date = parseInt(today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear()
+            const resp = await publicRequest.get(`/orders/getDailyRevenue?date=${date}`);
+            console.log(Number(resp.data[0].total_sale))
             setDailySale(Number(resp.data[0].total_sale));  
         }
         catch(err)

@@ -7,7 +7,16 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import { useEffect, useState } from "react";
+import { publicRequest } from "../../redux/ApiRequest";
 const data = [
+  { name: "August", Total: 8200 },
+  { name: "September", Total: 7400 },
+  { name: "October", Total: 9800 },
+  { name: "November", Total: 5200 },
+];
+
+let data1 = [
   { name: "August", Total: 8200 },
   { name: "September", Total: 7400 },
   { name: "October", Total: 9800 },
@@ -36,6 +45,38 @@ const userSpending3 = [
 ];
 
 const Chart = ({ aspect, title,element,id }) => {
+
+  const [dailySale,setDailySale] = useState();
+
+  useEffect(() => {
+    const getUsers = async () => {
+        try{
+          let today = new Date()
+          let date = parseInt(today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear()
+            const resp = await publicRequest.get(`/orders/getDailyRevenue?date=${date}`);
+            console.log(Number(resp.data[0].total_sale))
+            setDailySale(Number(resp.data[0].total_sale));  
+        }
+        catch(err)
+        {   
+            throw err;}
+    };
+    getUsers();
+},[]);
+
+useEffect(() => {
+  if(dailySale != null){
+    data1 = [
+      { name: "August", Total: 8200 },
+      { name: "September", Total: 7400 },
+      { name: "October", Total: 9800 },
+      { name: "November", Total: Number(5200)+Number(dailySale) },
+    ];
+  }
+
+},[dailySale]);
+
+
   return (
     <div className="chart">
       <div className="title">{title}</div>
@@ -43,7 +84,12 @@ const Chart = ({ aspect, title,element,id }) => {
         <AreaChart  
           width={730}
           height={250}
-          data={element == "Revenue" ? data : ((element == "User" && id  =="Mili") ? 
+          data={element == "Revenue" ?  ([
+            { name: "August", Total: 7456.23 },
+            { name: "September", Total: 4569.23 },
+            { name: "October", Total: 2356.14 },
+            { name: "November", Total: Number(5200)+Number(dailySale) },
+          ]): ((element == "User" && id  =="Mili") ? 
           userSpending1 : ((element == "User" && id =="milp") ? userSpending2 : ((element == "User" && id =="Enola") ? userSpending3 :data)))}
           margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
         >

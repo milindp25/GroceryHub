@@ -55,7 +55,7 @@ const PickupDataTable = () => {
               className="deliveryUpdation"
               onClick={() => updateStatus(params.row.orderID)}
             >
-              Mark ready for delivery
+              Mark ready for pickup
             </div>
           </div>
         );

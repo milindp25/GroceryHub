@@ -281,8 +281,11 @@ router.get("/getTotalSale", async (req, resp) => {
 router.get("/getDailyRevenue", async (req, resp) => {
 
   const db_con = require("../DB_Connection_Establishment");
+
+  const date = req.query.date;
+  console.log(date);
   
-  var result = db_con.query(`select sum(total) as total_sale from orders where order_Date = date_format(CURDATE(),'%m/%d/%Y')`,(err,res,fields) => {
+  var result = db_con.query(`select sum(total) as total_sale from orders where order_Date = '${date}'`,(err,res,fields) => {
     if (err) 
     {
     resp.status(500).json(err);

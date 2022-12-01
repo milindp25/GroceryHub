@@ -51,12 +51,12 @@ const DeliveryDataTable = () => {
             <Link to={`/orders/${params.row.orderID}`} style={{ textDecoration: "none" }}>
               <div className="viewButton">View</div>
             </Link>
-            <div
+            {/* <div
               className="deliveryUpdation"
               onClick={() => updateStatus(params.row.orderID)}
             >
               Mark ready for delivery
-            </div>
+            </div> */}
           </div>
         );
       },

@@ -36,11 +36,11 @@ const StockDataTable = () => {
             <Link to={`/products/${params.row.prod_id}`} style={{ textDecoration: "none" }}>
               <div className="viewButton">View</div>
             </Link>
-            <div
+            {/* <div
               className="deliveryUpdation"
             >
               Mark ready for delivery
-            </div>
+            </div> */}
           </div>
         );
       },
