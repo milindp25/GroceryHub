@@ -16,6 +16,8 @@ import Cart from "./pages/Cart";
 import ProductPage from "./pages/ProductPage";
 import Checkout from "./pages/Checkout";
 import AccountInfo from "./pages/AccountInfo";
+import { Reviews } from "@mui/icons-material";
+import Review from "./pages/Review";
 
 
 
@@ -30,6 +32,7 @@ function App() {
       <Route exact path ="/products" element ={<ProductList />} />
       <Route exact path ="/products/:category" element ={<ProductList/>} />
       <Route exact path ="/cart" element ={user ? <Cart/> : <Navigate to="/login" />} />
+      <Route exact path ="/reviews/:id" element ={user ? <Review/> : <Navigate to="/login" />} />
       <Route exact path ="/product/:id" element ={<ProductPage/>} />
       <Route exact path ="/checkout" element ={<Checkout/>} />
       <Route exact path ="/account" element ={<AccountInfo/>} />

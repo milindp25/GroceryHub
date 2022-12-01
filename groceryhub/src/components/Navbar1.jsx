@@ -29,7 +29,8 @@ import "../css/Navbar.css";
 import { publicRequest } from '../redux/ApiRequest';
 
 
-const apiKey = "AIzaSyDzJvc9AR2ArCqrRW4wNzvW7hhRpO06BtQ"
+//const apiKey = "AIzaSyDzJvc9AR2ArCqrRW4wNzvW7hhRpO06BtQ"//AIzaSyANJmLtN_ABXT468bsUflgEwCvGTDu6YW8
+const apiKey = "AIzaSyANJmLtN_ABXT468bsUflgEwCvGTDu6YW8"
 const mapApiJs = 'https://maps.googleapis.com/maps/api/js';
 const geocodeJson = 'https://maps.googleapis.com/maps/api/geocode/json';
 
@@ -218,7 +219,7 @@ const navigate = useNavigate();
  useEffect(() => {
 const getProduct = async () => {
             try{
-                const resp = await publicRequest.get(`http://localhost:5000/groceryhub/products`);
+                const resp = await publicRequest.get(`/products`);
                 setProducts(resp.data);
             }
             catch(err)

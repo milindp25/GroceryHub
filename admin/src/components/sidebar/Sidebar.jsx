@@ -13,6 +13,8 @@ import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { Link } from "react-router-dom";
 import { DarkModeContext } from "../../context/darkModeContext";
+import TimeToLeaveIcon from '@mui/icons-material/TimeToLeave';
+import Inventory2Icon from '@mui/icons-material/Inventory2';
 import { useContext } from "react";
 
 const Sidebar = () => {
@@ -28,10 +30,12 @@ const Sidebar = () => {
       <div className="center">
         <ul>
           <p className="title">MAIN</p>
+          <Link to="/" style={{ textDecoration: "none" }}>
           <li>
             <DashboardIcon className="icon" />
             <span>Dashboard</span>
           </li>
+          </Link>
           <p className="title">LISTS</p>
           <Link to="/users" style={{ textDecoration: "none" }}>
             <li>
@@ -45,32 +49,30 @@ const Sidebar = () => {
               <span>Products</span>
             </li>
           </Link>
+          <Link to="/orders" style={{ textDecoration: "none" }}>
           <li>
             <CreditCardIcon className="icon" />
             <span>Orders</span>
           </li>
+          </Link>
+          <Link to="/delivery" style={{ textDecoration: "none" }}>
           <li>
             <LocalShippingIcon className="icon" />
             <span>Delivery</span>
           </li>
-          <p className="title">USEFUL</p>
+          </Link>
+          <Link to="/stock" style={{ textDecoration: "none" }}>
           <li>
-            <InsertChartIcon className="icon" />
-            <span>Stats</span>
+            <Inventory2Icon className="icon" />
+            <span>Low Stock products</span>
           </li>
+          </Link>
+          <Link to="/pickup" style={{ textDecoration: "none" }}>
           <li>
-            <NotificationsNoneIcon className="icon" />
-            <span>Notifications</span>
+            <TimeToLeaveIcon className="icon" />
+            <span>Pickup</span>
           </li>
-          <p className="title">SERVICE</p>
-          <li>
-            <SettingsSystemDaydreamOutlinedIcon className="icon" />
-            <span>System Health</span>
-          </li>
-          <li>
-            <PsychologyOutlinedIcon className="icon" />
-            <span>Logs</span>
-          </li>
+          </Link>
           <li>
             <SettingsApplicationsIcon className="icon" />
             <span>Settings</span>
@@ -86,7 +88,7 @@ const Sidebar = () => {
           </li>
         </ul>
       </div>
-      <div className="bottom">
+      {/* <div className="bottom">
         <div
           className="colorOption"
           onClick={() => dispatch({ type: "LIGHT" })}
@@ -95,7 +97,7 @@ const Sidebar = () => {
           className="colorOption"
           onClick={() => dispatch({ type: "DARK" })}
         ></div>
-      </div>
+      </div> */}
     </div>
   );
 };

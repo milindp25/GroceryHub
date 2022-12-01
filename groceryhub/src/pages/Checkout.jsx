@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {userRequest} from '../redux/ApiRequest';
 import { useNavigate } from 'react-router-dom';
 import { clearCart } from '../redux/reduxCart';
+import Select from 'react-select';
 
 const Container = styled.div`
 
@@ -35,6 +36,7 @@ const[cardNumber,setCardNumber] = useState();
 const[cardExpiration,setCardExpiration] = useState();
 const[cardCVV,setCardCVV] = useState();
 const [orderID,setOrderID] = useState();
+const [userCategory,setUserCategory] = useState();
 
 const navigate = useNavigate();
 
@@ -61,6 +63,16 @@ useEffect(() =>{
   setIsAddress(true);
 },[data])
 
+const category = [{
+  value : "D",
+  label : "Delivery"
+},
+{
+  value : "P",
+  label : "Pickup"
+}
+];
+
 const submitOrder = async () => {
 
   try {
@@ -68,21 +80,6 @@ const submitOrder = async () => {
     setOrderID(res.data[0].order_id);
     
   } catch {}
-  
-  // try {
-  //   console.log("Order id is " +orderID);
-  //   const res = await userRequest.post("/orders/placeOrder", {
-  //     userId: currentUser.user_name,
-  //     products: prod,
-  //     shippingAddress : shippingAddress,
-  //     cardDetails : cardDetails,
-  //     amount: cart.total,
-  //     orderID:orderID
-  //   });
-  //   console.log("Order id is " +res.data.orderID);
-  // } catch {}
-  // alert("Order placed successfully");
-  // navigate("/");
 };
 
 useEffect(() =>{
@@ -105,7 +102,8 @@ useEffect(() =>{
       phoneNumber :phoneNumber,
       latitude : data.latitude,
       longitude :data.longitude,
-      orderDate : date
+      orderDate : date,
+      del_pic : userCategory
     })
     let cardDetails = ({
       creditCardName : cardName,
@@ -131,7 +129,7 @@ useEffect(() =>{
       console.log("Order id is " +res.data.orderID);
     } catch {}
     dispatch(clearCart());
-    alert("Order placed successfully");
+    alert("Order placed successfully and order ID is " + orderID);
     navigate("/");
   };
   if(orderID !== undefined)
@@ -169,7 +167,7 @@ useEffect(() =>{
             <li className="list-group-item d-flex justify-content-between bg-light">
               <div className="text-success">
                 <h6 className="my-0">Promo code</h6>
-                <small>EXAMPLECODE</small>
+                <small></small>
               </div>
               <span className="text-success">-$5</span>
             </li>
@@ -266,6 +264,14 @@ useEffect(() =>{
               <input type="checkbox" className="custom-control-input" id="save-info" />
               <label className="custom-control-label" htmlFor="save-info">Save this information for next time</label>
             </div>
+            <br />  
+            <h3 style={{color:"red",fontWeight:"bold",marginBottom:"10px"}}> Select if Delivery or Pickup</h3>
+            <Select  options={category}  
+                  value = {category.filter(function(option) 
+                    {return option.value === userCategory;})} 
+                    onChange={(event)=> setUserCategory(event.value)} 
+                    style={{width:"150px",height:"30px",fontSize:"16px",textAlign:"left",fontWeight:"bold"}}>
+                  </Select>
             {(isBilling && (<>
             <hr className="mb-4" />
             <h4 className="mb-3">Billling address</h4>

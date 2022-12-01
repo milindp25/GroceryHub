@@ -4,16 +4,56 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
+import { useEffect, useState } from "react";
+import { publicRequest } from "../../ApiRequest";
 
 const Widget = ({ type }) => {
   let data;
+  const [users,setUsers] = useState();
+  const [orders,setOrders] = useState();
+  const [saleTotal,setSaleTotal] = useState();
+  useEffect(() => {
+        
+    const getUsers = async () => {
+        try{
+            const resp = await publicRequest.get(`/users/getUsers`);
+            setUsers(resp.data.length);  
+        }
+        catch(err)
+        {   
+            throw err;}
+    };
+    const getOrders = async () => {
+      try{
+          const resp = await publicRequest.get(`/orders/getOrderID`);
+          setOrders(Number(resp.data[0].order_id)-1);  
+      }
+      catch(err)
+      {   
+          throw err;}
+  };
+  const getTotalSale = async () => {
+    try{
+        const resp = await publicRequest.get(`/orders/getTotalSale`);
+        setSaleTotal(Number(resp.data[0].total_sale));  
+    }
+    catch(err)
+    {   
+        throw err;}
+  };
+    getUsers();
+    getOrders();
+    getTotalSale();  
+},[]);
 
   //temporary
-  const amount = 100;
-  const diff = 20;
+  let amount = 100;
+  let diff = 20;
 
   switch (type) {
     case "user":
+      amount = users;
+      diff = 10;
       data = {
         title: "USERS",
         isMoney: false,
@@ -30,6 +70,8 @@ const Widget = ({ type }) => {
       };
       break;
     case "order":
+      diff = 11.5;
+      amount = orders;
       data = {
         title: "ORDERS",
         isMoney: false,
@@ -46,6 +88,8 @@ const Widget = ({ type }) => {
       };
       break;
     case "earning":
+      diff = 8.6;
+      amount = saleTotal;
       data = {
         title: "EARNINGS",
         isMoney: true,
@@ -59,6 +103,8 @@ const Widget = ({ type }) => {
       };
       break;
     case "balance":
+      diff = 7.8;
+      amount = saleTotal;
       data = {
         title: "BALANCE",
         isMoney: true,

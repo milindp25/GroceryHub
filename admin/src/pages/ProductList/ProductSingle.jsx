@@ -6,6 +6,7 @@ import List from "../../components/table/Table";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { publicRequest } from "../../ApiRequest";
+import ProductChart from "../../components/productChart/productChart";
 
 const ProductSingle = () => {
 
@@ -69,7 +70,7 @@ const ProductSingle = () => {
             </div>
           </div>
           <div className="right">
-            <Chart aspect={3 / 1} title="Product Sales ( Last 6 Months)" />
+            <ProductChart aspect={3 / 1} title="Product Sales ( Last Months)" id={id} />
           </div>
         </div>
         <div className="bottom">

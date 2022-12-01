@@ -9,7 +9,6 @@ import { publicRequest } from '../redux/ApiRequest';
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{0,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const REGISTER_URL = 'http://localhost:5000/groceryhub/register/addNewUser';
 const blank_img_url = "https://firebasestorage.googleapis.com/v0/b/groceryhub-images.appspot.com/o/users%2Fblank_image.jpg?alt=media&token=380031f8-21c1-4be6-888d-edcc5a8d31ee";
 
 

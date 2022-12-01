@@ -16,13 +16,21 @@
     padding: 5px;
     border-radius: 5px;
 
-    &.Approved {
+    &.Order-Placed {
+      color: red;
+      background-color: rgba(10, 24, 150, 0.151);
+    }
+    &.Ready-for-Pickup{
+      color: rgb(19, 0, 128);
+      background-color: rgba(10, 24, 150, 0.151);
+    }
+    &.Ready-for-Delivery{
+      color: violet;
+      background-color: rgba(10, 24, 150, 0.151);
+    }
+    &.Delivered {
       color: green;
       background-color: rgba(0, 128, 0, 0.151);
-    }
-    &.Pending {
-      color: goldenrod;
-      background-color: rgba(189, 189, 3, 0.103);
     }
   }
 }

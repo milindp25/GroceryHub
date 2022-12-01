@@ -70,7 +70,9 @@ const Single = () => {
           </div>
           <div className="right">
             <Chart aspect={3 / 1} 
-            title="User Spending ( Last 6 Months)" 
+            title="User Spending ( Last 4 Months)" 
+            element={"User"}
+            id = {id}
             />
           </div>
         </div>

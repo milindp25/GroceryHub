@@ -210,34 +210,6 @@ const ProductPage = () => {
      <p>{product[0] ? product[0].prod_Description : product.prod_Description}</p>
    </div>
    <div class="product-configuration">
-     {/* <div class="product-color">
-       <span>Color</span>
-       <div class="color-choose">
-         <div>
-           <input data-image="red" type="radio" id="red" name="color" value="red" checked />
-           <label for="red"><span></span></label>
-         </div>
-         <div>
-           <input data-image="blue" type="radio" id="blue" name="color" value="blue" />
-           <label for="blue"><span></span></label>
-         </div>
-         <div>
-           <input data-image="black" type="radio" id="black" name="color" value="black" />
-           <label for="black"><span></span></label>
-         </div>
-       </div>
-     </div> */}
-     {/* <div class="cable-config">
-       <span>Cable configuration</span>
-
-       <div class="cable-choose">
-         <button>Straight</button>
-         <button>Coiled</button>
-         <button>Long-coiled</button>
-       </div>
-
-       <a href="#">How to configurate your headphones</a>
-     </div> */}
    </div>
    <div class="product-price">
      <span>$ {product[0] ? product[0].prod_price : product.prod_price}</span>

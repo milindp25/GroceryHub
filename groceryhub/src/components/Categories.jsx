@@ -9,6 +9,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { publicRequest } from '../redux/ApiRequest';
 import Product from './Product';
+import { useSelector } from 'react-redux';
 
 const Icon = styled.div`
 
@@ -75,6 +76,9 @@ export const Categories = () => {
 
     const [productCategory, setProductCategory] = useState([]);
     const [products, setProducts] = useState([]);
+    const [suugested, setSuggested] = useState([]);
+
+    const {currentUser, isFetching, error } = useSelector((state) => state.user);
 
     /* fetches all product caretgories*/
     useEffect(() => {
@@ -97,11 +101,24 @@ export const Categories = () => {
           {   console.log(err);
               throw err;}
       };
+      const getSuggested = async () => {
+        if(currentUser != null)
+        {
+          try{
+            const resp = await publicRequest.get(`/suggestedProducts?id=${currentUser.user_name}`);
+            setSuggested(resp.data);
+        }
+        catch(err)
+        {   console.log(err);
+            throw err;}
+    };
+        }
+        getSuggested();
         getProduct();  
         getPopular();
     },[]);
 
-    console.log(products);
+    console.log(suugested);
 
     
 
@@ -213,7 +230,21 @@ export const Categories = () => {
         ))} 
     				</div>
     </div>
+    
     </section>
+
+    {currentUser != null ? (<>
+    <h2 style = {{color : "red",textAlign :"center"}}> User Suggested products </h2>
+    <section class="section-products">
+		<div class="container">
+            <div class="row">
+            {suugested.map((items) => (
+            <Product item={items} key={items.prod_id} ></Product>
+        ))} 
+    				</div>
+    </div>
+    </section>
+    </>) : (<></>)}
     </Container>
     <br />
     <br />    

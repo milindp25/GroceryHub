@@ -78,6 +78,114 @@ export const productColumns = [
   },
 ];
 
+export const ordersColumns = [
+  { field: "orderID", headerName: "ID", width: 70 },
+  {
+    field: "customer_name",
+    headerName: "Customer Name",
+    width: 200,
+    renderCell: (params) => {
+      return (
+        <div className="cellWithImg">
+          <img className="cellImg" src={params.row.img_url} alt="avatar" />
+          {params.row.customer_name}
+        </div>
+      );
+    },
+  },
+  {
+    field: "total",
+    headerName: "Order Total",
+    width: 150,
+    renderCell: (params) => {
+      return (
+        <div style={{textAlign:"center",justifyContent:"center"}}>
+          $ {params.row.total}
+        </div>
+      );
+    },
+  },
+  {
+    field: "phoneNumber",
+    headerName: "Phone Number",
+    width: 150,
+  },
+  {
+    field: "address",
+    headerName: "Delivery/Pickup Location",
+    width: 400,
+    renderCell: (params) => {
+      return (
+        <div style={{textAlign:"center",justifyContent:"center"}}>
+          {params.row.address}, {params.row.city} , {params.row.state} , {params.row.zip}
+        </div>
+      );
+    },
+  },
+  {
+    field: "delivery_or_pickup",
+    headerName: "Delivery or Pickup",
+    width: 150,
+    renderCell: (params) => {
+      return (
+        <div style={{textAlign:"center",justifyContent:"center"}}>
+          {params.row.delivery_or_pickup === 'D' ? 'Delivery' : 'Pickup'}
+        </div>
+      );
+    },
+  },
+  {
+    field: "order_status",
+    headerName: "Order Status",
+    width: 180,
+  },
+];
+
+export const sigleOrderColumns = [
+  { field: "productId", headerName: "ID", width: 70 },
+  {
+    field: "prod_name",
+    headerName: "Product Name",
+    width: 200,
+    renderCell: (params) => {
+      return (
+        <div className="cellWithImg">
+          <img className="cellImg" src={params.row.prod_img} alt="avatar" />
+          {params.row.prod_name}
+        </div>
+      );
+    },
+  },
+  {
+    field: "totalPrice",
+    headerName: "Order Total",
+    width: 150,
+    renderCell: (params) => {
+      return (
+        <div style={{textAlign:"center",justifyContent:"center"}}>
+          $ {params.row.totalPrice}
+        </div>
+      );
+    },
+  },
+  {
+    field: "prod_cat",
+    headerName: "Product Category",
+    width: 150,
+  },
+  
+  {
+    field: "prod_cat",
+    headerName: "Product Category",
+    width: 180,
+  },
+  {
+    field: "quantity",
+    headerName: "Product Stock Quantity",
+    width: 180,
+  },
+];
+
 //temporary data
 export const userRows = [
   {

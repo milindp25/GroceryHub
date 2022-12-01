@@ -79,7 +79,7 @@ const Product = ({item}) => {
 												{item.prod_disc > 0 && <span class="discount">{item.prod_disc}% off</span>}
 												<ul>
 														<li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
-														<li><a href="#"><i class="fas fa-heart"></i></a></li>
+														<li><Link to={`/reviews/${item.prod_id}`}><i class="fas fa-heart"></i></Link></li>
 														{/* <li><a href="#"><i class="fas fa-plus"></i></a></li> */}
 														<li><Link to={`/product/${item.prod_id}`}><i class="fas fa-expand"></i></Link></li>
 												</ul>

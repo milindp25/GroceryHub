@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL="http://localhost:5000/groceryhub";
+const BASE_URL="https://grocery-hub-group12.herokuapp.com/groceryhub";
 
 const user = JSON.parse(localStorage.getItem("persist:root"))?.user;
 const currentUser = user && JSON.parse(user).currentUser;

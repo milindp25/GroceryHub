@@ -4,8 +4,25 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
+import { useEffect, useState } from "react";
+import { publicRequest } from "../../redux/ApiRequest";
 
 const Featured = () => {
+
+  const [dailySale,setDailySale] = useState();
+  let target = Number(800);
+  useEffect(() => {
+    const getUsers = async () => {
+        try{
+            const resp = await publicRequest.get(`/orders/getDailyRevenue`);
+            setDailySale(Number(resp.data[0].total_sale));  
+        }
+        catch(err)
+        {   
+            throw err;}
+    };
+    getUsers();
+},[]);
   return (
     <div className="featured">
       <div className="top">
@@ -14,33 +31,39 @@ const Featured = () => {
       </div>
       <div className="bottom">
         <div className="featuredChart">
-          <CircularProgressbar value={70} text={"70%"} strokeWidth={5} />
+          <CircularProgressbar value={Number(dailySale)/Number(target)*100} text={Math.round(Number(dailySale)/Number(target)*100)+ "%"} strokeWidth={5} />
         </div>
         <p className="title">Total sales made today</p>
-        <p className="amount">$420</p>
+        <p className="amount">${dailySale}</p>
         <p className="desc">
           Previous transactions processing. Last payments may not be included.
         </p>
         <div className="summary">
           <div className="item">
             <div className="itemTitle">Target</div>
-            <div className="itemResult negative">
+            {Number(target) > Number(dailySale) ? (<div className="itemResult negative">
               <KeyboardArrowDownIcon fontSize="small"/>
-              <div className="resultAmount">$12.4k</div>
+              <div className="resultAmount">${target-dailySale}</div>
+            </div>)  :(
+              <div className="itemResult positive">
+              <KeyboardArrowDownIcon fontSize="small"/>
+              <div className="resultAmount">${dailySale-target}</div>
             </div>
+            )}
+            
           </div>
           <div className="item">
             <div className="itemTitle">Last Week</div>
             <div className="itemResult positive">
               <KeyboardArrowUpOutlinedIcon fontSize="small"/>
-              <div className="resultAmount">$12.4k</div>
+              <div className="resultAmount">${4800}</div>
             </div>
           </div>
           <div className="item">
             <div className="itemTitle">Last Month</div>
             <div className="itemResult positive">
               <KeyboardArrowUpOutlinedIcon fontSize="small"/>
-              <div className="resultAmount">$12.4k</div>
+              <div className="resultAmount">$9800</div>
             </div>
           </div>
         </div>

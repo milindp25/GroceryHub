@@ -18,7 +18,8 @@ const Login = () => {
     e.preventDefault();
     dispatch(loginStart());
     try {
-      const res = await publicRequest.post("http://localhost:5000/groceryhub/login/checkUser", { userName : username, password });
+      const res = await publicRequest.post("/login/checkUser", { userName : username, password });
+      console.log(res.data);
       dispatch(loginSuccess(res.data));
     } catch (err) {
       alert("Invalid Username/Password");

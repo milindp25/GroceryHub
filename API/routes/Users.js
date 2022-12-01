@@ -67,10 +67,6 @@ router.post("/deleteUser", async (req, resp) => {
 
   router.post("/updateUser", async (req, resp) => {
 
-     // user_name : req.body.user.userName,user_category : req.body.user.userCategory,password : CryptoJS.AES.encrypt(req.body.user.password,process.env.AES_KEY).toString(),
-    //     email_id : req.body.user.email,first_name : req.body.user.fname , last_name : req.body.user.lname ,
-    //     address : req.body.user.address ,city : req.body.user.city ,state : req.body.user.state ,zip : req.body.user.zip ,mobileNumber : req.body.user.mobileNumber,img_url : req.body.user.url
-
     const db_con = require("../DB_Connection_Establishment");
     const id = req.query.id;
     
@@ -89,6 +85,5 @@ router.post("/deleteUser", async (req, resp) => {
   });
   
   });
-
 
 module.exports = router;

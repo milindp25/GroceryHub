@@ -183,7 +183,7 @@ const handleUpload = (e) => {
               <br/>
               <br/>
               <br/>
-              <button onClick={handleUpload}>Send</button>
+              <button onClick={handleUpload}>Add</button>
             </form>
           </div>
         </div>

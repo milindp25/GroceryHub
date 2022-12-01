@@ -188,6 +188,49 @@ router.get("/popular", async (req, resp) => {
   }
 });
 
+router.get("/suggestedProducts", async (req, resp) => {
+    
+  const db_con = require("../DB_Connection_Establishment");
+  const id = req.query.id;
+  
+  var result = db_con.query(`select * from products where prod_id in (
+                            select distinct(p.prod_id) from orders o ,users u, order_details od , products p  where o.customer_username = u.user_name and u.user_name ='${id}'
+                             and o.orderID = od.orderID and od.productId = p.prod_id) limit 6`,(err,res,fields) => {
+    if (err) 
+    {
+    resp.status(500).json(err);
+    throw err;
+    };
+    resp.status(200).json(res);
+});
+
+  try {
+  } catch (err) {
+    resp.status(500).json(err);
+    throw err;
+  }
+});
+
+router.get("/stockLowProds", async (req, resp) => {
+    
+  const db_con = require("../DB_Connection_Establishment");
+  
+  var result = db_con.query(`Select *,ROW_NUMBER() OVER(PARTITION BY prod_id) AS row_num from products where quantity between 0 and 10`,(err,res,fields) => {
+    if (err) 
+    {
+    resp.status(500).json(err);
+    throw err;
+    };
+    resp.status(200).json(res);
+});
+
+  try {
+  } catch (err) {
+    resp.status(500).json(err);
+    throw err;
+  }
+});
+
 
 
 
