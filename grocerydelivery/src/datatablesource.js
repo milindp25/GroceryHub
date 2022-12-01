@@ -152,8 +152,9 @@ export const ordersColumns = [
               travelMode: "DRIVING",
             }}
             callback={(res) => {
-              console.log("RESPONSE", Number(res.rows[0].elements[0].distance.text.split("km")[0])*0.621371);
-               {miles = Number(res.rows[0].elements[0].distance.text.split("km")[0])*0.621371}
+              console.log("RESPONSE", Number(res.rows[0].elements[0].distance.text.split("km")[0].replace(",","")))
+              console.log("RESPONSE", Number(res.rows[0].elements[0].distance.text.split("km")[0].replace(",",""))*0.621371);
+               {miles = Number(res.rows[0].elements[0].distance.text.split("km")[0].replace(",",""))*0.621371}
             //   this.setState({
             //     totalTime: res.rows[0].elements[0].duration.text,
             //     totalDistance: res.rows[0].elements[0].distance.text,
